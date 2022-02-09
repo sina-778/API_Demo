@@ -8,12 +8,12 @@ import 'package:http/http.dart' as http;
 
 Future<List<Post>> fetchPost() async {
   final response =
-  await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
+  await http.get(Uri.parse('http://172.20.20.38/api/buildinglink/rn_app/userinfo/view_searchusr_read.php'));
 
   if (response.statusCode == 200) {
     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
 
-    return parsed.map<Post>((json) => Post.fromMap(json)).toList();
+    return parsed.map<Post>((json) => Post.fromJson(json)).toList();
   } else {
     throw Exception('Failed to load album');
   }
@@ -65,14 +65,17 @@ class _MyAppState extends State<MyApp> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${snapshot.data![index].title}",
+                          "${snapshot.data![index].viewSearchusrUsrId}",
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(height: 10),
-                        Text("${snapshot.data![index].body}"),
+                        Text("${snapshot.data![index].viewSearchusrUsrName}"),
+
+                        SizedBox(height: 10),
+                        Text("${snapshot.data![index].viewSearchusrUsrAccid}"),
                       ],
                     ),
                   ),
